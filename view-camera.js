@@ -1,5 +1,5 @@
 let cameras = [];
-let camId = 1;
+let camId = 0;
 let currentStream = null;
 
 document.addEventListener('readystatechange', (event) => {
