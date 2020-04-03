@@ -26,25 +26,26 @@ document.addEventListener('readystatechange', (event) => {
 		  .then(successCallback)
 		  .catch(errorCallback);
 
-		if('mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices) {
-			if(navigator.mediaDevices.enumerateDevices) {
-				navigator.mediaDevices.enumerateDevices().then(media_devices => {
-					media_devices.forEach(media_device => {
-						if(location.href.includes('&debug')) {
-							console.log(media_device);
-						}
-				    if(media_device.kind === 'videoinput') {
-					   	cameras = cameras.concat(media_device.deviceId);
-						}
-					})
-		    })
-		  }
+
 		}
 		let changeVideo = event => {
 			console.log('clicked on video');
 			console.log(cameras);
 			console.log(camId);
 			console.log(currentStream);
+			if('mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices) {
+				if(navigator.mediaDevices.enumerateDevices) {
+					navigator.mediaDevices.enumerateDevices().then(media_devices => {
+						media_devices.forEach(media_device => {
+							if(location.href.includes('&debug')) {
+								console.log(media_device);
+							}
+							if(media_device.kind === 'videoinput') {
+								cameras = cameras.concat(media_device.deviceId);
+							}
+						})
+					})
+				}
 			if((camId + 1) < cameras.length) {
 				camId = camId +1;
 			} else {
@@ -68,7 +69,6 @@ document.addEventListener('readystatechange', (event) => {
 			}
 		};
 
-		setTimeout(changeVideo, 5);
 		body.addEventListener('click', changeVideo);
 
 	}
