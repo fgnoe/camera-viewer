@@ -21,12 +21,7 @@ document.addEventListener('readystatechange', (event) => {
 			window.alert('Error: ', error);
 		}
 
-		navigator.mediaDevices.getUserMedia({ audio: false,
-			video: {
-				deviceId: {
-					exact: cameras[camId]
-				}
-			}})
+		navigator.mediaDevices.getUserMedia({ audio: false, video: true })
 		  .then(successCallback)
 		  .catch(errorCallback);
 
@@ -45,7 +40,17 @@ document.addEventListener('readystatechange', (event) => {
 		  }
 		}
 
-		video.addEventListener('click',event => {
+		video.srcObject = null;
+		navigator.mediaDevices.getUserMedia({
+			audio: false,
+			video: {
+				deviceId: {
+					exact: cameras[camId]
+				}
+			}
+		}).then(successCallback).catch(errorCallback);
+
+		video.addEventListener('dblclick',event => {
 			if(location.href.includes('&debug')) {
 				console.log('clicked on video');
 				console.log(cameras);
