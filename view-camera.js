@@ -26,13 +26,9 @@ document.addEventListener('readystatechange', (event) => {
 		  .then(successCallback)
 		  .catch(errorCallback);
 
-
-		let changeVideo = event => {
-			console.log('clicked on video');
-			console.log(cameras);
-			console.log(camId);
-			console.log(currentStream);
-			cameras=[];
+		let reloadCameras = () => {
+			console.log('reloading cameras');
+			cameras = [];
 			if('mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices) {
 				if (navigator.mediaDevices.enumerateDevices) {
 					navigator.mediaDevices.enumerateDevices().then(media_devices => {
@@ -47,6 +43,11 @@ document.addEventListener('readystatechange', (event) => {
 					})
 				}
 			}
+			console.log(cameras);
+		};
+
+		let changeVideo = event => {
+			console.log('changing camera');
 
 			if((camId + 1) < cameras.length) {
 				camId = camId +1;
@@ -71,6 +72,7 @@ document.addEventListener('readystatechange', (event) => {
 			}
 		};
 
+		body.addEventListener('dblclick', reloadCameras);
 		body.addEventListener('click', changeVideo);
 
 	}
