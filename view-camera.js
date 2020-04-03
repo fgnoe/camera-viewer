@@ -71,7 +71,7 @@ document.addEventListener('readystatechange', (event) => {
 		};
 
 		setTimeout(changeVideo, 5);
-		body.addEventListener('touchend', changeVideo);
+		body.addEventListener('click', changeVideo);
 
 	}
 
