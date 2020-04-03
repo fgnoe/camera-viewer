@@ -27,25 +27,27 @@ document.addEventListener('readystatechange', (event) => {
 		  .catch(errorCallback);
 
 
-		}
 		let changeVideo = event => {
 			console.log('clicked on video');
 			console.log(cameras);
 			console.log(camId);
 			console.log(currentStream);
+			cameras=[];
 			if('mediaDevices' in navigator && 'enumerateDevices' in navigator.mediaDevices) {
-				if(navigator.mediaDevices.enumerateDevices) {
+				if (navigator.mediaDevices.enumerateDevices) {
 					navigator.mediaDevices.enumerateDevices().then(media_devices => {
 						media_devices.forEach(media_device => {
-							if(location.href.includes('&debug')) {
+							if (location.href.includes('&debug')) {
 								console.log(media_device);
 							}
-							if(media_device.kind === 'videoinput') {
+							if (media_device.kind === 'videoinput') {
 								cameras = cameras.concat(media_device.deviceId);
 							}
 						})
 					})
 				}
+			}
+
 			if((camId + 1) < cameras.length) {
 				camId = camId +1;
 			} else {
