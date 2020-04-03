@@ -41,7 +41,7 @@ document.addEventListener('readystatechange', (event) => {
 		  }
 		}
 
-		body.addEventListener('click',event => {
+		body.addEventListener('touchend',event => {
 			if(location.href.includes('&debug')) {
 				console.log('clicked on video');
 				console.log(cameras);
