@@ -21,7 +21,12 @@ document.addEventListener('readystatechange', (event) => {
 			window.alert('Error: ', error);
 		}
 
-		navigator.mediaDevices.getUserMedia({ audio: false, video: true })
+		navigator.mediaDevices.getUserMedia({ audio: false,
+			video: {
+				deviceId: {
+					exact: cameras[camId]
+				}
+			}})
 		  .then(successCallback)
 		  .catch(errorCallback);
 
