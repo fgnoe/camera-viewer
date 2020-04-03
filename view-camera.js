@@ -7,6 +7,7 @@ document.addEventListener('readystatechange', (event) => {
 	if(document.readyState === 'complete') {
 
 		const video = document.querySelector('video');
+		const body = document.querySelector('body');
 
 		function successCallback(stream) {
 		  currentStream = stream;
@@ -40,17 +41,7 @@ document.addEventListener('readystatechange', (event) => {
 		  }
 		}
 
-		video.srcObject = null;
-		navigator.mediaDevices.getUserMedia({
-			audio: false,
-			video: {
-				deviceId: {
-					exact: cameras[camId]
-				}
-			}
-		}).then(successCallback).catch(errorCallback);
-
-		video.addEventListener('dblclick',event => {
+		body.addEventListener('click',event => {
 			if(location.href.includes('&debug')) {
 				console.log('clicked on video');
 				console.log(cameras);
