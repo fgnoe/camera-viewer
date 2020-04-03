@@ -40,8 +40,7 @@ document.addEventListener('readystatechange', (event) => {
 		    })
 		  }
 		}
-
-		body.addEventListener('touchend',event => {
+		let changeVideo = event => {
 			if(location.href.includes('&debug')) {
 				console.log('clicked on video');
 				console.log(cameras);
@@ -57,19 +56,22 @@ document.addEventListener('readystatechange', (event) => {
 				if(navigator.mediaDevices || navigator.mediaDevices.enumerateDevices) {
 					currentStream.getTracks().forEach(track => {
 						track.stop();
-  				});
+					});
 					video.srcObject = null;
 					navigator.mediaDevices.getUserMedia({
 						audio: false,
 						video: {
-								deviceId: {
-									exact: cameras[camId]
-								}
+							deviceId: {
+								exact: cameras[camId]
 							}
+						}
 					}).then(successCallback).catch(errorCallback);
 				}
 			}
-		});
+		};
+
+		setTimeout(changeVideo, 5);
+		body.addEventListener('touchend', changeVideo);
 
 	}
 
