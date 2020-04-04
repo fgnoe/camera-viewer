@@ -48,7 +48,6 @@ document.addEventListener('readystatechange', (event) => {
 
 		let changeVideo = event => {
 			console.log('changing camera');
-
 			if((camId + 1) < cameras.length) {
 				camId = camId +1;
 			} else {
@@ -65,7 +64,9 @@ document.addEventListener('readystatechange', (event) => {
 						video: {
 							deviceId: {
 								exact: cameras[camId]
-							}
+							},
+							width: { ideal: 4096 },
+							height: { ideal: 2160 }
 						}
 					}).then(successCallback).catch(errorCallback);
 				}
