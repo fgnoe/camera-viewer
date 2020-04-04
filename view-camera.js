@@ -53,6 +53,9 @@ document.addEventListener('readystatechange', (event) => {
 			} else {
 				camId = 0;
 			}
+			if (cameras.length < 2) {
+				reloadCameras();
+			}
 			if(cameras.length > 1) {
 				if(navigator.mediaDevices || navigator.mediaDevices.enumerateDevices) {
 					currentStream.getTracks().forEach(track => {
@@ -73,8 +76,7 @@ document.addEventListener('readystatechange', (event) => {
 			}
 		};
 
-		body.addEventListener('dblclick', reloadCameras);
-		body.addEventListener('click', changeVideo);
+		body.addEventListener('dblclick', changeVideo);
 
 	}
 
